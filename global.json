@@ -1,3 +1,3 @@
 {
-    "projects":["Domain", "Repository", "Api"]
+    "projects":["Domain", "Repository", "Api", "Infra.Data"]
 }
