@@ -43,6 +43,7 @@ namespace Api.Controllers
                         Description = model.Description, 
                         Reward = Decimal.Parse(model.Reward), 
                         Localization = model.Localization,
+                        Date = DateTime.Parse(model.Date),
                         UserId = user.Id
                     };
                 
