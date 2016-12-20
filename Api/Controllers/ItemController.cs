@@ -4,6 +4,10 @@ using Api.Infra.Data.Context;
 using Api.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Application.Interfaces;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using AspNet.Security.OAuth.Validation;
 
 namespace Api.Controllers
 {
@@ -12,17 +16,24 @@ namespace Api.Controllers
     {
         private readonly ApiContext _apiContext;
         private readonly IItemAppService _itemService;
+        private readonly UserManager<User> _userManager;
 
-        public ItemController(IItemAppService itemService, ApiContext apiContext)
+        public ItemController(IItemAppService itemService, ApiContext apiContext, UserManager<User> userManager)
         {
             _itemService = itemService;
             _apiContext = apiContext;
+            _userManager = userManager;
         }
 
+        [Authorize(ActiveAuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
         [HttpPost]
-        public IActionResult Post([FromBody]ItemViewModel model)
+        public async Task<IActionResult> Post([FromBody]ItemViewModel model)
         {
             EnsureDatabaseCreated(_apiContext);
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) {
+                return BadRequest();
+            }
     
             if (ModelState.IsValid)
             {
@@ -31,11 +42,33 @@ namespace Api.Controllers
                         Title = model.Title, 
                         Description = model.Description, 
                         Reward = Decimal.Parse(model.Reward), 
-                        Localization = model.Localization
+                        Localization = model.Localization,
+                        UserId = user.Id
                     };
                 
                 _itemService.CreateItem(item);
                 return Json(new {itemId= item.Id});
+            }
+
+            return Ok("error");
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            EnsureDatabaseCreated(_apiContext);
+
+            if (ModelState.IsValid)
+            {
+                var item = _itemService.GetById(id);
+                var jsonObject = new
+                {
+                    title= item.Title,
+                    description= item.Description,
+                    localization= item.Localization,
+                    reward= item.Reward
+                };
+                return Json(jsonObject);
             }
 
             return Ok("error");
@@ -48,7 +81,6 @@ namespace Api.Controllers
     
             if (ModelState.IsValid)
             {
-                                
                 var items = _itemService.GetItemsByTitle(title);
                 return Json(items);
             }

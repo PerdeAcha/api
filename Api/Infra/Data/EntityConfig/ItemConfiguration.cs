@@ -11,6 +11,7 @@ namespace Api.Infra.Data.EntityConfig
                 entity.Property(c => c.Title)
                     .IsRequired()
                     .HasMaxLength(150);
+                
             });
         }
     }
