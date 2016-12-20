@@ -19,5 +19,10 @@ namespace Application
         {
             _itemService.CreateItem(item);
         }
+
+        public IEnumerable<Item> GetItemsByTitle(string title)
+        {
+            return _itemService.GetItemsByTitle(title);
+        }
     }
 }

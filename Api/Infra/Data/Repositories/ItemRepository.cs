@@ -11,5 +11,10 @@ namespace Api.Infra.Data.Repositories
         {
             Db.Item.Add(item);
         }
+
+        public IEnumerable<Item> GetItemsByTitle(string title)
+        {
+            return Db.Item.Where(p => p.Title.Contains(title));
+        }
     }
 }

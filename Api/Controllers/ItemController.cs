@@ -35,6 +35,22 @@ namespace Api.Controllers
                     };
                 
                 _itemService.CreateItem(item);
+                return Json(new {itemId= item.Id});
+            }
+
+            return Ok("error");
+        }
+
+        [HttpGet]
+        public IActionResult Get(string title)
+        {
+            EnsureDatabaseCreated(_apiContext);
+    
+            if (ModelState.IsValid)
+            {
+                                
+                var items = _itemService.GetItemsByTitle(title);
+                return Json(items);
             }
 
             return Ok("error");

@@ -19,5 +19,10 @@ namespace Domain.Services
         {
             _itemRepository.Add(item);
         }
+
+        public IEnumerable<Item> GetItemsByTitle(string title)
+        {
+            return _itemRepository.GetItemsByTitle(title);
+        }
     }
 }
