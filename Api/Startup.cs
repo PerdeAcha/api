@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Infra.Data.Context;
+using Api.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Domain.Entities;
@@ -81,7 +81,9 @@ namespace Api
             app.UseOAuthValidation(); // enabled auth through bearer tokens
             
             app.UseOpenIddict();
-            
+
+            app.UseMvcWithDefaultRoute();
+
             app.UseMvc();
         }
     }

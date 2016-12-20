@@ -5,7 +5,7 @@ using System.Linq;
 using Domain.Entities;
 using Api.Infra.Data.EntityConfig;
 
-namespace Infra.Data.Context
+namespace Api.Infra.Data.Context
 {
     public class ApiContext : IdentityDbContext<User>
     {
