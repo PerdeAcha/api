@@ -8,11 +8,10 @@ using Api.ViewModels.Account;
 
 namespace Api.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        private readonly UserManager<User> _userManager;
         private readonly ApiContext _apiContext;
-        private static bool _databaseChecked;
+        private readonly UserManager<User> _userManager;
 
         public AccountController(UserManager<User> userManager, ApiContext apiContext)
         {
@@ -39,18 +38,6 @@ namespace Api.Controllers
         }
 
         #region Helpers
-
-        // The following code creates the database and schema if they don't exist.
-        // This is a temporary workaround since deploying database through EF migrations is
-        // not yet supported in this release.
-        // Please see this http://go.microsoft.com/fwlink/?LinkID=615859 for more information on how to do deploy the database
-        // when publishing your application.
-        private static void EnsureDatabaseCreated(ApiContext context) {
-            if (!_databaseChecked) {
-                _databaseChecked = true;
-                context.Database.EnsureCreated();
-            }
-        }
 
         private void AddErrors(IdentityResult result) {
             foreach (var error in result.Errors) {

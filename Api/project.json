@@ -30,6 +30,9 @@
     "Domain": {
       "target": "project"
     },
+    "Application": {
+      "target": "project"
+    },
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-*"
   },
   "tools": {

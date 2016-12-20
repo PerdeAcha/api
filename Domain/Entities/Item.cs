@@ -12,7 +12,6 @@ namespace Domain.Entities
         public DateTime UpdatedAt { get; set; }
         public decimal Reward { get; set; }
         public string Localization { get; set; }
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

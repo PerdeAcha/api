@@ -14,5 +14,10 @@ namespace Domain.Services
         {
             _itemRepository = itemRepository;
         }
+
+        public void CreateItem(Item item)
+        {
+            _itemRepository.Add(item);
+        }
     }
 }

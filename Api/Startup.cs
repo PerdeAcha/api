@@ -8,9 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Api.Infra.Data.Context;
+using Api.Infra.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Domain.Entities;
+using Domain.Interfaces.Services;
+using Domain.Interfaces.Repositories;
+using Domain.Services;
+using Application.Interfaces;
+using Application;
 
 namespace Api
 {
@@ -67,7 +73,14 @@ namespace Api
             // shuts down. Tokens signed using this key are automatically invalidated.
             // This method should only be used during development.
             .AddEphemeralSigningKey();
+           
+            
             services.AddMvc();
+
+
+            services.AddSingleton<IItemAppService, ItemAppService>();
+            services.AddSingleton<IItemService, ItemService>();
+            services.AddSingleton<IItemRepository, ItemRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
