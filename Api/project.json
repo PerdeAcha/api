@@ -16,22 +16,26 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
     "Microsoft.EntityFrameworkCore.Tools": {
       "version": "1.1.0-preview4-final",
       "type": "build"
     },
+    "AspNet.Security.OAuth.Validation": "1.0.0-alpha2-final",
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.EntityFrameworkCore": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
     "Domain": {
-          "target": "project"
-    }
+      "target": "project"
+    },
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-*"
   },
-
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
     "Microsoft.EntityFrameworkCore.Tools.DotNet": "1.1.0-preview4-final"
   },
-
   "frameworks": {
     "netcoreapp1.1": {
       "imports": [
@@ -40,18 +44,15 @@
       ]
     }
   },
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
   },
-
   "runtimeOptions": {
     "configProperties": {
       "System.GC.Server": true
     }
   },
-
   "publishOptions": {
     "include": [
       "wwwroot",
@@ -60,12 +61,13 @@
       "web.config"
     ]
   },
-
   "scripts": {
-    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+    "postpublish": [
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
+    ]
   },
-
   "tooling": {
     "defaultNamespace": "Api"
-  }
+  },
+  "userSecretsId": "aspnet-Api-47c0854f-e539-4470-9287-0c62df09b726"
 }

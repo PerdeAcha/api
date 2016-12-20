@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 
-namespace Infra.Data.EntityConfig
+namespace Api.Infra.Data.EntityConfig
 {
     public class ItemConfiguration
     {

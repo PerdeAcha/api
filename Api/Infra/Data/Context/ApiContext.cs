@@ -1,12 +1,13 @@
 using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Domain.Entities;
-using Infra.Data.EntityConfig;
+using Api.Infra.Data.EntityConfig;
 
 namespace Infra.Data.Context
 {
-    public class ApiContext : DbContext
+    public class ApiContext : IdentityDbContext<User>
     {
         public ApiContext(DbContextOptions<ApiContext> options)
             : base(options)
@@ -15,6 +16,7 @@ namespace Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             new ItemConfiguration(modelBuilder);
         }
     }
